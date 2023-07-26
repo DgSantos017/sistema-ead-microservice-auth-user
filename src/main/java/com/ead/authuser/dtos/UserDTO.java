@@ -1,5 +1,6 @@
 package com.ead.authuser.dtos;
 
+import com.ead.authuser.validations.UserNameConstraint;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
@@ -24,42 +25,43 @@ public class UserDTO {
 
     @NotBlank(groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class,})
-    @Size(min = 3, max = 50)
+    @Size(min = 3, max = 50, groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
+    @UserNameConstraint(groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
     private String userName;
 
     @NotBlank(groups = UserView.RegistrationPost.class)
-    @Email
+    @Email(groups = UserView.RegistrationPost.class)
     @JsonView(UserView.RegistrationPost.class)
-    @Size(min = 5, max = 50)
+    @Size(min = 5, max = 50, groups = UserView.RegistrationPost.class)
     private String email;
 
     @NotBlank(groups = { UserView.RegistrationPost.class, UserView.PasswordPut.class })
     @JsonView({UserView.RegistrationPost.class, UserView.PasswordPut.class})
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 20, groups = { UserView.RegistrationPost.class, UserView.PasswordPut.class })
     private String password;
 
     @NotBlank(groups = UserView.PasswordPut.class)
     @JsonView(UserView.PasswordPut.class)
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 20, groups = UserView.PasswordPut.class)
     private String OldPassword;
 
     @NotBlank(groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
-    @Size(min = 5, max = 50)
+    @Size(min = 5, max = 50, groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
     private String fullName;
 
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
-    @Size(min = 5, max = 30)
+    @Size(min = 5, max = 30, groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
     private String phoneNumber;
 
 
     @NotBlank
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
-    @Size(min = 5, max = 30)
+    @Size(min = 5, max = 30, groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
     private String cpf;
 
     @NotBlank(groups = UserView.ImagePut.class)
     @JsonView(UserView.ImagePut.class)
-    @Size(min = 5, max = 50)
+    @Size(min = 5, max = 50, groups = UserView.ImagePut.class)
     private String imageUrl;
 }
