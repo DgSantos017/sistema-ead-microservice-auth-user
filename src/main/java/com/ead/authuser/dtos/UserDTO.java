@@ -19,7 +19,7 @@ public class UserDTO {
 
     private UUID userId;
 
-    @JsonView(UserView.RegistrationPost.class)
+    @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class,})
     private String userName;
 
     @JsonView(UserView.RegistrationPost.class)
