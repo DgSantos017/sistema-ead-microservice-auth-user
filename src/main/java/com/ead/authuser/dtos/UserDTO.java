@@ -13,14 +13,12 @@ import java.util.UUID;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
-
     public interface UserView {
         public static interface RegistrationPost {}
         public static interface UserPut {}
         public static interface PasswordPut {}
         public static interface ImagePut {}
     }
-
     private UUID userId;
 
     @NotBlank(groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
@@ -53,7 +51,6 @@ public class UserDTO {
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
     @Size(min = 5, max = 30, groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
     private String phoneNumber;
-
 
     @NotBlank
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
