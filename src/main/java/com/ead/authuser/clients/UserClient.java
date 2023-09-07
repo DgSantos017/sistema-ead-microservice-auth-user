@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 import java.util.UUID;
 
 @Log4j2
@@ -27,10 +29,13 @@ public class UserClient {
 
     public Page<CourseDto> getAllCoursesByUser(UUID userId, Pageable pageable){
         ResponseEntity<ResponsePageDto<CourseDto>> result = null;
+        List<CourseDto> searchResult = null;
         String url = utilsService.createUrl(userId, pageable);
         try{
             ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>() {};
             result = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
+            searchResult = result.getBody().getContent();
+            log.debug("Response Number of elements: {} ", searchResult.size());
         } catch (HttpStatusCodeException e){
             log.error("Error request /courses {} ", e);
         }
