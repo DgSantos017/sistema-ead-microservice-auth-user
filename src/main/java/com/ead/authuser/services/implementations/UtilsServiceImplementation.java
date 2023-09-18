@@ -1,4 +1,4 @@
-package com.ead.authuser.services.implementation;
+package com.ead.authuser.services.implementations;
 
 import com.ead.authuser.services.UtilsService;
 import org.springframework.data.domain.Pageable;
