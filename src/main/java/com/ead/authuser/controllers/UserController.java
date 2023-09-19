@@ -66,18 +66,6 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<Object> deleteUser(@PathVariable(value = "userId")UUID userId) {
-        Optional<UserModel> userModelOptional = userService.findById(userId);
-
-        if(!userModelOptional.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
-        } else {
-            userService.delete(userModelOptional.get());
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
-        }
-    }
-
     @PutMapping("/{userId}")
     public ResponseEntity<Object> updateUser(@PathVariable(value = "userId")UUID userId,
                                              @RequestBody @Validated(UserDTO.UserView.UserPut.class) @JsonView(UserDTO.UserView.UserPut.class)  UserDTO userDTO) {
@@ -100,7 +88,38 @@ public class UserController {
         }
     }
 
-    @PutMapping("/password/{userId}")
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Object> deleteUser(@PathVariable(value = "userId")UUID userId) {
+        Optional<UserModel> userModelOptional = userService.findById(userId);
+
+        if(!userModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
+        } else {
+            userService.delete(userModelOptional.get());
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
+        }
+    }
+
+    @PutMapping("/{userId}/image")
+    public ResponseEntity<Object> updateImage(@PathVariable(value = "userId")UUID userId,
+                                              @RequestBody @Validated(UserDTO.UserView.ImagePut.class) @JsonView(UserDTO.UserView.ImagePut.class)  UserDTO userDTO) {
+        Optional<UserModel> userModelOptional = userService.findById(userId);
+
+        if(!userModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
+        } else {
+            var userModel = userModelOptional.get();
+
+            userModel.setImageUrl(userDTO.getImageUrl());
+            userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
+
+            userService.save(userModel);
+
+            return ResponseEntity.status(HttpStatus.OK).body("url image updated successfully");
+        }
+    }
+
+    @PutMapping("/{userId}/password")
     public ResponseEntity<Object> updatePassword(@PathVariable(value = "userId")UUID userId,
                                                  @RequestBody @Validated(UserDTO.UserView.PasswordPut.class) @JsonView(UserDTO.UserView.PasswordPut.class)  UserDTO userDTO) {
         Optional<UserModel> userModelOptional = userService.findById(userId);
@@ -121,25 +140,6 @@ public class UserController {
             userService.save(userModel);
 
             return ResponseEntity.status(HttpStatus.OK).body("password updated successfully");
-        }
-    }
-
-    @PutMapping("/image/{userId}")
-    public ResponseEntity<Object> updateImage(@PathVariable(value = "userId")UUID userId,
-                                              @RequestBody @Validated(UserDTO.UserView.ImagePut.class) @JsonView(UserDTO.UserView.ImagePut.class)  UserDTO userDTO) {
-        Optional<UserModel> userModelOptional = userService.findById(userId);
-
-        if(!userModelOptional.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
-        } else {
-            var userModel = userModelOptional.get();
-
-            userModel.setImageUrl(userDTO.getImageUrl());
-            userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
-
-            userService.save(userModel);
-
-            return ResponseEntity.status(HttpStatus.OK).body("url image updated successfully");
         }
     }
 }

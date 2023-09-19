@@ -24,8 +24,8 @@ public class InstructorController {
     @Autowired
     UserService userService;
 
-    @PutMapping("/turn-into-instructor")
-    public ResponseEntity<Object> saveSubscriptionInstructor(@RequestBody @Valid InstructorDto instructorDto){
+    @PutMapping("/turn-user-into-instructor")
+    public ResponseEntity<Object> turnUserIntoInstructor(@RequestBody @Valid InstructorDto instructorDto){
         Optional<UserModel> userModelOptional = userService.findById(instructorDto.getUserId());
 
         if(!userModelOptional.isPresent()){
