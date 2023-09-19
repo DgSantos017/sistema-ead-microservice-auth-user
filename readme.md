@@ -14,7 +14,11 @@ I have shared a workspace in Insomnia with all the endpoints. If you would like 
 
 https://github.com/DgSantos017/sistema-ead-microservice-service-registry/blob/master/requestsInsominia.json
 ![image](https://github.com/DgSantos017/sistema-ead-microservice-auth-user/assets/62971277/acf5333d-4fea-4a6f-9171-2c8da442039f)
-When accessing this link, click on the red-highlighted download button in the screenshot above, and if you have Insomnia installed on your machine, simply import it
+When accessing this link, click on the red-highlighted download button in the screenshot above, and if you have Insomnia installed on your machine, simply import it.
+
+In this repository with the link below, you will also find all the endpoints documented in the readme.md, providing a second alternative for reference, if preferred.
+
+https://github.com/DgSantos017/sistema-ead-microservice-service-registry
 
 ## !!! Attention !!!
 This microservice relies on the operation of the three microservices listed below. I'll provide the links for each, and you'll find documentation similar to this in their respective readme.md files. Simply follow the provided instructions to set them up.
