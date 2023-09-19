@@ -20,7 +20,9 @@ When accessing this link, click on the red-highlighted download button in the sc
 This microservice relies on the operation of the three microservices listed below. I'll provide the links for each, and you'll find documentation similar to this in their respective readme.md files. Simply follow the provided instructions to set them up.
 
 https://github.com/DgSantos017/sistema-ead-microservice-service-registry
+
 https://github.com/DgSantos017/sistema-ead-microservice-api-gateway
+
 https://github.com/DgSantos017/sistema-ead-microservice-course
 
 
