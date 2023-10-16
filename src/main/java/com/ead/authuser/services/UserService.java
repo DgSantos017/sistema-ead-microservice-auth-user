@@ -10,20 +10,18 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserService {
+
     List<UserModel> findAll();
     Optional<UserModel> findById(UUID userId);
-
     void delete(UserModel userModel);
-
     UserModel save(UserModel userModel);
-
     boolean existsByUserCPF(String cpf);
-
     boolean existsByEmail(String email);
-
     boolean existsByUserName(String userName);
-
     Page<UserModel> findAll(Specification<UserModel> spec, Pageable pageable);
 
     UserModel saveUser(UserModel userModel);
+    void deleteUser(UserModel userModel);
+    UserModel updateUser(UserModel userModel);
+    UserModel updatePassword(UserModel userModel);
 }

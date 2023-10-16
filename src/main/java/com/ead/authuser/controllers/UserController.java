@@ -75,7 +75,7 @@ public class UserController {
             userModel.setCpf(userDTO.getCpf());
             userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-            userService.save(userModel);
+            userService.updateUser(userModel);
 
             return ResponseEntity.status(HttpStatus.OK).body(userModel);
         }
@@ -88,7 +88,7 @@ public class UserController {
         if(!userModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
         } else {
-            userService.delete(userModelOptional.get());
+            userService.deleteUser(userModelOptional.get());
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
         }
     }
@@ -106,7 +106,7 @@ public class UserController {
             userModel.setImageUrl(userDTO.getImageUrl());
             userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-            userService.save(userModel);
+            userService.updateUser(userModel);
 
             return ResponseEntity.status(HttpStatus.OK).body("url image updated successfully");
         }
@@ -130,7 +130,7 @@ public class UserController {
             userModel.setPassword(userDTO.getPassword());
             userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-            userService.save(userModel);
+            userService.updatePassword(userModel);
 
             return ResponseEntity.status(HttpStatus.OK).body("password updated successfully");
         }
