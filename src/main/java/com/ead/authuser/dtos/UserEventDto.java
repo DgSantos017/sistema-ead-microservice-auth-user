@@ -5,8 +5,9 @@ import java.util.UUID;
 
 @Data
 public class UserEventDto {
+
     private UUID userId;
-    private String userName;
+    private String username;
     private String email;
     private String fullName;
     private String userStatus;
@@ -15,4 +16,6 @@ public class UserEventDto {
     private String cpf;
     private String imageUrl;
     private String actionType;
+
+
 }

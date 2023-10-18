@@ -8,10 +8,10 @@ import com.ead.authuser.repositories.UserRepository;
 import com.ead.authuser.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Pageable;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,8 +50,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public boolean existsByUserCPF(String cpf) {
-        return userRepository.existsByCpf(cpf);
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
     }
 
     @Override
@@ -60,12 +60,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public boolean existsByUserName(String userName) {
-        return userRepository.existsByUserName(userName);
-    }
-
-    @Override
-    public Page<UserModel> findAll(Specification<UserModel> spec,  Pageable pageable) {
+    public Page<UserModel> findAll(Specification<UserModel> spec, Pageable pageable) {
         return userRepository.findAll(spec, pageable);
     }
 
@@ -79,17 +74,17 @@ public class UserServiceImplementation implements UserService {
 
     @Transactional
     @Override
-    public UserModel updateUser(UserModel userModel) {
-        userModel = save(userModel);
-        userEventPublisher.publishUserEvent(userModel.convertToUserEventDto(), ActionType.UPDATE);
-        return userModel;
+    public void deleteUser(UserModel userModel) {
+        delete(userModel);
+        userEventPublisher.publishUserEvent(userModel.convertToUserEventDto(), ActionType.DELETE);
     }
 
     @Transactional
     @Override
-    public void deleteUser(UserModel userModel) {
-        delete(userModel);
-        userEventPublisher.publishUserEvent(userModel.convertToUserEventDto(), ActionType.DELETE);
+    public UserModel updateUser(UserModel userModel) {
+        userModel = save(userModel);
+        userEventPublisher.publishUserEvent(userModel.convertToUserEventDto(), ActionType.UPDATE);
+        return userModel;
     }
 
     @Override
