@@ -61,5 +61,4 @@ public class CourseClient {
         List<CourseDto> searchResult = new ArrayList<>();
         return new PageImpl<>(searchResult);
     }
-
 }

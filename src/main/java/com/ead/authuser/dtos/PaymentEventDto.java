@@ -18,5 +18,4 @@ public class PaymentEventDto {
     private String paymentMessage;
     private boolean recurrence;
     private UUID userId;
-
 }

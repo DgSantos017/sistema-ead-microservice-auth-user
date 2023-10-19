@@ -16,5 +16,4 @@ public class SpecificationTemplate {
             @Spec(path = "fullName", spec = Like.class)
     })
     public interface UserSpec extends Specification<UserModel> {}
-
 }

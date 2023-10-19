@@ -18,5 +18,4 @@ public class ResolverConfig extends WebMvcConfigurationSupport {
         argumentResolvers.add(resolver);
         super.addArgumentResolvers(argumentResolvers);
     }
-
 }

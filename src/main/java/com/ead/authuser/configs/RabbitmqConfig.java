@@ -38,5 +38,4 @@ public class RabbitmqConfig {
     public FanoutExchange fanoutUserEvent() {
         return new FanoutExchange(exchangeUserEvent);
     }
-
 }
